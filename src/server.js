@@ -7,7 +7,7 @@ import passport from 'passport';
 import '@babel/polyfill/noConflict';
 
 import './lib/config/dbConfig';
-// import users from './routes/user';
+import users from './routes/user';
 import passportFunction from './lib/config/passportConfig';
 
 dotenv.config();
@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 passportFunction(passport);
 
-// app.use('/api/v1/auth', users);
+app.use('/api/v1/auth', users);
 
 const PORT = process.env.PORT || 6060;
 const server = app.listen(PORT, () => {
