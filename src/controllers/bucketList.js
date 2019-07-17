@@ -20,7 +20,7 @@ export default class bucketListController {
         const bucketLists = new BucketList({
           name,
           created_by: createdBy,
-          items,
+          // items,
         });
         await bucketLists.save();
         return res.status(201).json({
@@ -33,10 +33,28 @@ export default class bucketListController {
     }
   }
 
-  // static async getBucketList(req, res) {
-  //   try {
-  //   } catch (error) {
-  //     errorHandler.tryCatchError(res, error);
-  //   }
-  // }
+  static async getBucketList(req, res) {
+    try {
+      const doc = await BucketList.find({});
+      return res.status(200).json({
+        message: 'Success',
+        doc,
+      });
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
+
+  static async getById(req, res) {
+    try {
+      const { id } = req.params;
+      const doc = await BucketList.findById(id);
+      return res.status(200).json({
+        message: 'Success',
+        doc,
+      });
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
 }

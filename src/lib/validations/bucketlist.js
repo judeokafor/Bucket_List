@@ -6,9 +6,7 @@ export default class bucketList {
       name: Joi.string()
         .max(255)
         .required(),
-      bucketName: Joi.string()
-        .max(255)
-        .required(),
+      bucketName: Joi.string().max(255),
     });
   }
 }
