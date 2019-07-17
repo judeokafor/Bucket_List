@@ -70,4 +70,17 @@ export default class bucketListController {
       errorHandler.tryCatchError(res, error);
     }
   }
+
+  static async deleteById(req, res) {
+    try {
+      const { id } = req.params;
+      const doc = await BucketList.findOneAndDelete({ _id: id });
+      return res.status(200).json({
+        message: 'Deelete Success',
+        doc,
+      });
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
 }
