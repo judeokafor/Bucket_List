@@ -9,7 +9,7 @@ import { BucketList, BucketItem } from '../models/BucketList';
 export default class bucketListController {
   static async postBucketList(req, res) {
     try {
-      const { name, bucketName, createdBy } = req.body;
+      const { name, bucketName } = req.body;
       const result = Joi.validate({ name, bucketName }, validation.bucketList, {
         convert: false,
       });
@@ -34,7 +34,7 @@ export default class bucketListController {
       const { name } = req.query;
       let { page, limit } = req.query;
       let doc;
-      page = page || 1;
+      page = parseInt(page, 10) || 1;
       limit = parseInt(limit, 10) || 20;
       const skip = limit * (page - 1);
       if (name) {
@@ -66,7 +66,9 @@ export default class bucketListController {
   static async getById(req, res) {
     try {
       const { id } = req.params;
-      const doc = await BucketList.findById(id);
+      const doc = await BucketList.find({ _id: id })
+        .populate('created_by')
+        .exec();
       return res.status(200).json({
         message: 'Success',
         doc,
@@ -128,29 +130,29 @@ export default class bucketListController {
     }
   }
 
-  static async updateBucketListItems(req, res) {
-    try {
-      const { id, item_id } = req.params;
-      const { bucketName } = req.body;
-      const result = Joi.validate({ bucketName }, validation.bucketListItem, {
-        convert: false,
-      });
-      if (result.error === null) {
-        const list = await BucketList.findOneAndUpdate({ _id: id });
-        if (list) {
-          const items = {
-            bucketName,
-          };
+  // static async updateBucketListItems(req, res) {
+  //   try {
+  //     const { id } = req.params;
+  //     const { bucketName } = req.body;
+  //     const result = Joi.validate({ bucketName }, validation.bucketListItem, {
+  //       convert: false,
+  //     });
+  //     if (result.error === null) {
+  //       const list = await BucketList.findOneAndUpdate({ _id: id });
+  //       if (list) {
+  //         const items = {
+  //           bucketName,
+  //         };
 
-          return res.status(200).json({
-            items,
-          });
-        }
-        return res.status(404).json({ message: 'No Bucklist available' });
-      }
-      return errorHandler.validationError(res, result);
-    } catch (error) {
-      errorHandler.tryCatchError(res, error);
-    }
-  }
+  //         return res.status(200).json({
+  //           items,
+  //         });
+  //       }
+  //       return res.status(404).json({ message: 'No Bucklist available' });
+  //     }
+  //     return errorHandler.validationError(res, result);
+  //   } catch (error) {
+  //     errorHandler.tryCatchError(res, error);
+  //   }
+  // }
 }
