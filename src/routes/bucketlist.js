@@ -33,5 +33,10 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   bucketlistController.postBucketListItems,
 );
+// router.put(
+//   '/bucketlists/:id/items/:item_id',
+//   passport.authenticate('jwt', { session: false }),
+//   bucketlistController.updateBucketListItems,
+// );
 
 export default router;
