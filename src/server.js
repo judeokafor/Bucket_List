@@ -7,8 +7,10 @@ import passport from 'passport';
 import '@babel/polyfill/noConflict';
 
 import './lib/config/dbConfig';
-import users from './routes/user';
 import passportFunction from './lib/config/passportConfig';
+
+import users from './routes/user';
+import bucklists from './routes/bucketlist';
 
 dotenv.config();
 const app = express();
@@ -23,6 +25,7 @@ app.use(morgan('dev'));
 app.use(passport.initialize());
 passportFunction(passport);
 
+app.use('/api/v1', bucklists);
 app.use('/api/v1/auth', users);
 
 const PORT = process.env.PORT || 6060;
