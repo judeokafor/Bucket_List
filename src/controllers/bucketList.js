@@ -14,13 +14,9 @@ export default class bucketListController {
         convert: false,
       });
       if (result.error === null) {
-        const items = new BucketItem({
-          bucketName,
-        });
         const bucketLists = new BucketList({
           name,
-          created_by: createdBy,
-          // items,
+          created_by: req.user.id,
         });
         await bucketLists.save();
         return res.status(201).json({
@@ -35,10 +31,32 @@ export default class bucketListController {
 
   static async getBucketList(req, res) {
     try {
-      const doc = await BucketList.find({});
+      const { name } = req.query;
+      let { page, limit } = req.query;
+      let doc;
+      page = page || 1;
+      limit = parseInt(limit, 10) || 20;
+      const skip = limit * (page - 1);
+      if (name) {
+        doc = await BucketList.find({ name });
+      }
+      if (page && limit) {
+        if (page === 0 || page < 0) {
+          return res.status(400).json({
+            message: 'Page must be 1 and above',
+          });
+        }
+        doc = await BucketList.find({ created_by: req.user.id })
+          .limit(limit)
+          .skip(skip)
+          .exec();
+      } else if (!req.query) {
+        doc = await BucketList.find({});
+      }
       return res.status(200).json({
-        message: 'Success',
+        message: 'success',
         doc,
+        size: doc.length,
       });
     } catch (error) {
       errorHandler.tryCatchError(res, error);
@@ -103,6 +121,32 @@ export default class bucketListController {
           },
         ).exec();
         return res.status(200).json({ doc });
+      }
+      return errorHandler.validationError(res, result);
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
+
+  static async updateBucketListItems(req, res) {
+    try {
+      const { id, item_id } = req.params;
+      const { bucketName } = req.body;
+      const result = Joi.validate({ bucketName }, validation.bucketListItem, {
+        convert: false,
+      });
+      if (result.error === null) {
+        const list = await BucketList.findOneAndUpdate({ _id: id });
+        if (list) {
+          const items = {
+            bucketName,
+          };
+
+          return res.status(200).json({
+            items,
+          });
+        }
+        return res.status(404).json({ message: 'No Bucklist available' });
       }
       return errorHandler.validationError(res, result);
     } catch (error) {
