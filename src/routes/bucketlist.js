@@ -28,5 +28,10 @@ router.delete(
   passport.authenticate('jwt', { session: false }),
   bucketlistController.deleteById,
 );
+router.post(
+  '/bucketlists/:id/items',
+  passport.authenticate('jwt', { session: false }),
+  bucketlistController.postBucketListItems,
+);
 
 export default router;
