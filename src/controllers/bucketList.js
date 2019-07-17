@@ -57,4 +57,17 @@ export default class bucketListController {
       errorHandler.tryCatchError(res, error);
     }
   }
+
+  static async updateById(req, res) {
+    try {
+      const { id } = req.params;
+      const { name } = req.body;
+      await BucketList.findOneAndUpdate({ _id: id }, { name });
+      return res.status(204).json({
+        message: 'Success',
+      });
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
 }
