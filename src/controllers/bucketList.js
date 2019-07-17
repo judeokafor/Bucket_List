@@ -74,11 +74,37 @@ export default class bucketListController {
   static async deleteById(req, res) {
     try {
       const { id } = req.params;
-      const doc = await BucketList.findOneAndDelete({ _id: id });
+      await BucketList.findOneAndDelete({ _id: id });
       return res.status(200).json({
-        message: 'Deelete Success',
-        doc,
+        message: 'Deleted Successfully',
       });
+    } catch (error) {
+      errorHandler.tryCatchError(res, error);
+    }
+  }
+
+  static async postBucketListItems(req, res) {
+    try {
+      const { id } = req.params;
+      const { bucketName } = req.body;
+      const result = Joi.validate({ bucketName }, validation.bucketListItem, {
+        convert: false,
+      });
+      if (result.error === null) {
+        const items = new BucketItem({
+          bucketName,
+        });
+        const doc = await BucketList.findOneAndUpdate(
+          { _id: id },
+          {
+            $push: {
+              items,
+            },
+          },
+        ).exec();
+        return res.status(200).json({ doc });
+      }
+      return errorHandler.validationError(res, result);
     } catch (error) {
       errorHandler.tryCatchError(res, error);
     }
