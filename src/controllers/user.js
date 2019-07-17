@@ -63,20 +63,26 @@ export default class userController {
 
   static currentProfile(req, res) {
     if (req.user) {
+      const {
+        isAdmin, email, firstname, lastname,
+      } = req.user;
       return res.status(200).json({
-        ...req.user,
+        isAdmin,
         isAuth: true,
+        email,
+        firstname,
+        lastname,
       });
     }
   }
 
   static async logOut(req, res) {
     try {
-      const response = await User.findOneAndUpdate(
+      const { token } = await User.findOneAndUpdate(
         { _id: req.user._id },
         { token: '' },
       );
-      if (response) {
+      if (token === '') {
         req.logOut();
         return res.status(200).json({
           success: true,
