@@ -1,0 +1,146 @@
+<div class="my-lg-3 my-md-2">
+  <div class="card" *ngIf="showStartUp">
+    <div class="card-body">
+      <div class="jumbotron text-center">
+        <div class="alert alert-danger" role="alert" *ngIf="error.show == true">
+          {{ error.msg }}
+        </div>
+        <h1>Create a bucketlist</h1>
+        <q>
+          reality settles fantacy
+        </q>
+        <div class="form-group my-3 ">
+          <form action="" [formGroup]="bucketListForm">
+            <input
+              type="text"
+              class="form-control"
+              id="bucketlistName"
+              aria-describedby="bucketlistName"
+              placeholder="Enter bucketlist name"
+              formControlName="name"
+            />
+          </form>
+        </div>
+        <button (click)="submitList()" type="submit" class="btn btn-primary">
+          Create List
+        </button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!showStartUp">
+    <div class="d-flex justify-content-between">
+      <div class="form-group d-flex">
+        <form action="" [formGroup]="searchForm">
+          <input
+            type="text"
+            class="form-control"
+            id="searchName"
+            aria-describedby="bucketItemName"
+            placeholder="Search Bucket list"
+            formControlName="name"
+          />
+        </form>
+        <button
+          *ngIf="!reset"
+          (click)="submitSearch()"
+          type="submit"
+          class="btn btn-primary ml-3"
+        >
+          Search
+        </button>
+      </div>
+      <button
+        type="button"
+        class="btn-lg btn-primary fix-button"
+        data-toggle="modal"
+        data-target="#exampleModalCenter"
+      >
+        New Bucketlist
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 my-2" *ngFor="let item of bucketList">
+        <div class="card">
+          <ul class="list-group list-group-flush">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              <a class="cursor" (click)="moveTo(item._id)">{{ item.name }}</a>
+              <div>
+                <a class="" (click)="edit(item._id)" class="text-primary"
+                  ><i class="cursor material-icons mr-2">
+                    edit
+                  </i></a
+                >
+                <a class="" (click)="deleteItem(item._id)" class="text-danger"
+                  ><i class="cursor material-icons">
+                    delete_outline
+                  </i>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- <button class="btn btn-outline-success cursor">
+        Next
+      </button> -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          Create New Bucketlist
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" [formGroup]="bucketListForm">
+          <input
+            type="text"
+            class="form-control"
+            id="bucketlistName"
+            aria-describedby="bucketlistName"
+            placeholder="Enter bucketlist name"
+            formControlName="name"
+          />
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="submitList()"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class=" my-4 row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div>
+          <h4 class="text-center">
+            Please Login
+          </h4>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="error.show == true"
+          >
+            {{ error.msg }}
+          </div>
+          <div class="my-2">
+            <form [formGroup]="loginForm">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  formControlName="email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="mt-2 ">
+                  <small>
+                    Sign Up
+                    <a
+                      class="text-primary"
+                      [routerLink]="['/register']"
+                      routerLinkActive="router-link-active"
+                    >
+                      here
+                    </a>
+                  </small>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="userLogin()"
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://app.swaggerhub.com/apis-docs/BucketList/bucket-list/1.0.0">Swagger Documentation hosted at Swagger Hub</a>
+  </div>
+</div>

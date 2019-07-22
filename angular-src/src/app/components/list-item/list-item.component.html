@@ -1,0 +1,73 @@
+<div class="container my-3">
+  <div class="d-flex justify-content-end my-2">
+    <a [routerLink]="['/list']" routerLinkActive="router-link-active">
+      <i class="material-icons text-danger">
+        arrow_back
+      </i>
+    </a>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="alert alert-danger" role="alert" *ngIf="error.show == true">
+        {{ error.msg }}
+      </div>
+      <div class="d-flex justify-content-between">
+        <div>
+          <h3 class="d-inline mr-3">
+            {{ title | uppercase }}
+          </h3>
+          <span class="badge badge-primary badge-pill p-1">{{
+            itemLength
+          }}</span>
+        </div>
+        <div class="form-group d-flex justify-content-between">
+          <form action="" [formGroup]="bucketItemForm">
+            <input
+              type="text"
+              class="form-control"
+              id="bucketItemName"
+              aria-describedby="bucketItemName"
+              placeholder="Enter Item name"
+              formControlName="name"
+            />
+          </form>
+          <button
+            (click)="submitList()"
+            type="submit"
+            class="btn btn-primary ml-3"
+          >
+            Add Item
+          </button>
+        </div>
+      </div>
+      <div>
+        <small class="font-weight-light">
+          Created on:
+          <span class="font-italic font-weight-bold">
+            {{ date | date: 'fullDate' }}
+          </span>
+        </small>
+      </div>
+      <ul class="list-group">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center my-2"
+          *ngFor="let item of bucketItem"
+        >
+          {{ item.name }}
+          <div>
+            <a (click)="edit(item._id)" class="cursor text-primary"
+              ><i class="material-icons mr-2">
+                edit
+              </i></a
+            >
+            <a (click)="deleteItem(item._id)" class=" cursor text-danger"
+              ><i class="material-icons">
+                delete_outline
+              </i></a
+            >
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,6 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const bucketItems = new Schema(
-  {
-    bucketName: {
-      type: String,
-      maxlength: 255,
-    },
-    done: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true },
-);
 const bucketListSchema = new Schema(
   {
     name: {
@@ -26,10 +13,22 @@ const bucketListSchema = new Schema(
       ref: 'User',
       required: true,
     },
-    items: [bucketItems],
+    items: [
+      {
+        name: {
+          type: String,
+        },
+        done: {
+          type: Boolean,
+          default: false,
+        },
+      },
+      {
+        timestamps: true,
+      },
+    ],
   },
   { timestamps: true },
 );
 const BucketList = mongoose.model('BucketList', bucketListSchema);
-const BucketItem = mongoose.model('BucketItem', bucketItems);
-export { BucketList, BucketItem };
+export default BucketList;
