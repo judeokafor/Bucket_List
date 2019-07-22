@@ -15,6 +15,8 @@ import bucklists from './routes/bucketlist';
 dotenv.config();
 const app = express();
 
+app.use(express.static('../angular-src/dist/angular-src'));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -28,7 +30,7 @@ passportFunction(passport);
 app.use('/api/v1', bucklists);
 app.use('/api/v1/auth', users);
 
-const PORT = process.env.PORT || 6060;
+const PORT = process.env.PORT || 6066;
 const server = app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });

@@ -1,0 +1,84 @@
+<div class=" my-4 row">
+  <div class="col-md-6 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <div class="alert alert-danger" role="alert" *ngIf="error.show == true">
+          {{ error.msg }}
+        </div>
+        <div>
+          <h4 class="text-center">
+            Please fill in these details
+          </h4>
+          <div class="my-2">
+            <form [formGroup]="registerForm">
+              <div class="form-group">
+                <label for="firstname">First Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  aria-describedby="firstname"
+                  placeholder="Enter First Name"
+                  formControlName="firstname"
+                />
+              </div>
+              <div class="form-group">
+                <label for="lastname">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastname"
+                  aria-describedby="lastname"
+                  placeholder="Enter Last Name"
+                  formControlName="lastname"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  formControlName="email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="mt-2 ">
+                  <small>
+                    Sign In
+                    <a
+                      class="text-primary"
+                      [routerLink]="['/']"
+                      routerLinkActive="router-link-active"
+                    >
+                      here
+                    </a>
+                  </small>
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  (click)="userSignUp()"
+                >
+                  Register
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -7,13 +7,12 @@ export default class bucketList {
         .min(4)
         .max(255)
         .required(),
-      bucketName: Joi.string().max(255),
     });
   }
 
   static get bucketListItem() {
     return Joi.object({
-      bucketName: Joi.string()
+      name: Joi.string()
         .min(4)
         .max(255)
         .required(),

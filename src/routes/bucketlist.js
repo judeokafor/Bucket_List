@@ -33,10 +33,15 @@ router.post(
   passport.authenticate('jwt', { session: false }),
   bucketlistController.postBucketListItems,
 );
-// router.put(
-//   '/bucketlists/:id/items/:item_id',
-//   passport.authenticate('jwt', { session: false }),
-//   bucketlistController.updateBucketListItems,
-// );
+router.put(
+  '/bucketlists/:bucket_id/items/:item_id',
+  passport.authenticate('jwt', { session: false }),
+  bucketlistController.updateBucketListItems,
+);
+router.delete(
+  '/bucketlists/:bucket_id/items/:item_id',
+  passport.authenticate('jwt', { session: false }),
+  bucketlistController.deleteBucketListItems,
+);
 
 export default router;
