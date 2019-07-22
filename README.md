@@ -78,6 +78,9 @@ Documentation was done with swagger and hosted at [SwaggerHub](https://app.swagg
 <tr><td>PUT</td><td>/api/v2/bucketlists/<:id></td><td>Update a specific buckelist</td></tr>
 <tr><td>GET</td><td>/api/v2/bucketlists/<:id></td><td>Get a specific buckelist</td></tr>
 <tr><td>DELETE</td><td>/api/v2/bucketlists/<:id></td><td>Delete a specific buckelist</td></tr>
+<tr><td>POST</td><td>/api/v2/bucketlists/<:id>/items</td><td>Add an item to a bucketlist</td></tr>
+<tr><td>PUT</td><td>/api/v2/bucketlists/<:bucket_id>/items/<:item_id></td><td>Update an item from a bucket list</td></tr>
+<tr><td>DELETE</td><td>/api/v2/bucketlists/<:bucket_id>/items/<:item_id></td><td>Delete an item from a bucket list</td></tr>
 
 </table>
 
@@ -89,8 +92,10 @@ Documentation was done with swagger and hosted at [SwaggerHub](https://app.swagg
   [Bucketlist](https://github.com/judeokafor/bucketlist.git)
 - Run - npm install to install packages
 - Run npm run build to build the project
-- Run npm run dev to start the server for development
+- Run npm run dev to start the backend server for development
+- Cd into angular-src and run ng serve to start the server for development
 - Run npm start to start the server for production
+- Navigate to [localhost:4200](http://localhost:4200/) in browser to access the frontend
 - Navigate to [localhost:6060](http://localhost:6060/) in browser to access the
   application
 
