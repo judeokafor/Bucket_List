@@ -4,8 +4,8 @@ let connectionString;
 if (process.env.NODE_ENV === 'test') {
   connectionString = env.DATABASE_URL;
 } else {
-  // connectionString = env.DATABASE_URL_DEV;
-  connectionString = env.DATABASE_URL;
+  connectionString = env.DATABASE_URL_DEV;
+  // connectionString = env.DATABASE_URL;
 }
 mongoose
   .connect(connectionString, {
