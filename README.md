@@ -12,9 +12,6 @@ Bucketlist is a mini app where a logged in user can input a number of experience
   - [Testing](#testing)
   - [Development](#development)
 
-### Template
-
-Template is hosted at [Bucketlist Github Pages](https://judeokafor.github.io/bucketlist/)
 
 ### API Deployment
 
@@ -62,6 +59,9 @@ Documentation was done with swagger and hosted at [SwaggerHub](https://app.swagg
 - User (authenticated) can view all bucketlist.
 - User (authenticated) can view all bucketlist with a specific name.
 - User (authenticated) can view all bucketlist with a pagination.
+- User (authenticated) can post bucketlist items.
+- User (authenticated) can edit bucketlist items.
+- User (authenticated) can delete bucketlist items.
 
 ## API Endpoints
 
@@ -96,7 +96,7 @@ Documentation was done with swagger and hosted at [SwaggerHub](https://app.swagg
 - Cd into angular-src and run ng serve to start the server for development
 - Run npm start to start the server for production
 - Navigate to [localhost:4200](http://localhost:4200/) in browser to access the frontend
-- Navigate to [localhost:6060](http://localhost:6060/) in browser to access the
+- Navigate to [localhost:6060](http://localhost:6060/) in postman to access the
   application
 
 **NOTE:** Create a `.env` file configuration following the `.sample.env`.
