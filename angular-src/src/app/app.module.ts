@@ -14,13 +14,11 @@ import { ListComponent } from './components/list/list.component';
 import { ListItemComponent } from './components/list-item/list-item.component'
 
 import { CrudService } from './services/crud.service'
-import { AuthService } from './services/auth.service';
+import { AuthService, getToken } from './services/auth.service';
 import { JwtHelperService, JwtModuleOptions, JwtModule } from '@auth0/angular-jwt';
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
-    tokenGetter: () => {
-      return localStorage.getItem('token');
-    },
+    tokenGetter: getToken,
     whitelistedDomains: ['localhost:4200']
   }
 };
