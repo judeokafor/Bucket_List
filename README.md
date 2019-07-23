@@ -12,7 +12,6 @@ Bucketlist is a mini app where a logged in user can input a number of experience
   - [Testing](#testing)
   - [Development](#development)
 
-
 ### API Deployment
 
 API is deployed at [Bucketlist Heroku App](https://bucketlist01.herokuapp.com/)
@@ -24,6 +23,7 @@ Documentation was done with swagger and hosted at [SwaggerHub](https://app.swagg
 ## Technologies
 
 - [NodeJS](https://nodejs.org/) - Runtime Environment
+- [Anugular](https://angular.io/) - Frontend Framework Powered by Google
 - [ExpressJs](https://expressjs.com/) - Web Application Framework
 - [NPM](https://www.npmjs.com/) - Dependency Manager
 - [HTML](https://www.w3c.com/) - Hyper Text Markup language
