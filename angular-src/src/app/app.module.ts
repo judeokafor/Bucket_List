@@ -11,10 +11,19 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ListComponent } from './components/list/list.component';
+import { ListItemComponent } from './components/list-item/list-item.component'
 
 import { CrudService } from './services/crud.service'
 import { AuthService } from './services/auth.service';
-import { ListItemComponent } from './components/list-item/list-item.component'
+import { JwtHelperService, JwtModuleOptions, JwtModule } from '@auth0/angular-jwt';
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+    tokenGetter: () => {
+      return localStorage.getItem('token');
+    },
+    whitelistedDomains: ['localhost:4200']
+  }
+};
 
 @NgModule({
   declarations: [
@@ -33,6 +42,7 @@ import { ListItemComponent } from './components/list-item/list-item.component'
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [CrudService, AuthService],
   bootstrap: [AppComponent]

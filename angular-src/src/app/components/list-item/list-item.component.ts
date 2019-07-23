@@ -34,6 +34,7 @@ export class ListItemComponent implements OnInit {
   done: Boolean;
 
   title: String;
+
   itemLength: Number;
 
   constructor(
@@ -48,6 +49,7 @@ export class ListItemComponent implements OnInit {
   ngOnInit() {
     this.getBucketItem();
   }
+
 
   getBucketItem() {
     this._crudService

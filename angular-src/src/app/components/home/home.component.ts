@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
           }
         },
         (err) => {
+          console.log(err);
           this.error.show = true;
           this.error.msg = err.error.message;
           setTimeout(() => {
