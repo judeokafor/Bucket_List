@@ -47,6 +47,21 @@ export class ListComponent implements OnInit {
     this.getAllBucketList();
   }
 
+  logout() {
+    this._crudService.getWithHeaders('auth/logout', this.token).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.success) {
+          localStorage.removeItem('token')
+          this._router.navigate(['/']);
+        }
+      },
+      (err) => {
+        console.log(err);
+      },
+    );
+  }
+
   resetFunction() {
     location.reload();
   }
@@ -73,7 +88,6 @@ export class ListComponent implements OnInit {
         this.error.msg = '';
       }, 3000);
     } else {
-      console.log(this.searchForm.value.name);
       this._crudService
         .getWithHeaders(
           `/bucketlists?name=${this.searchForm.value.name}`,
@@ -81,9 +95,9 @@ export class ListComponent implements OnInit {
         )
         .subscribe(
           (res) => {
-            console.log(res);
             this.bucketList = res.doc;
             this.reset = true;
+            // this.getAllBucketList();
           },
           err => console.log(err),
         );
@@ -110,7 +124,10 @@ export class ListComponent implements OnInit {
               type: 'success',
               timer: 2000,
             });
-            this.getAllBucketList();
+            setTimeout(() => {
+              
+              this.getAllBucketList();
+            }, 500);
           },
           (err) => {
             this.error.show = true;
@@ -171,7 +188,6 @@ export class ListComponent implements OnInit {
       confirmButtonText: 'Edit',
       showLoaderOnConfirm: true,
       preConfirm: (value) => {
-        console.log(value);
         this._crudService
           .putWithHeaders(`/bucketlists/${id}`, { name: value }, this.token)
           .subscribe(

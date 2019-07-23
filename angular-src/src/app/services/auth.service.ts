@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'Rxjs';
-import { User } from '../models/User';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
-const service_base = 'http://localhost:6066/api/v1/';
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  }),
-};
 @Injectable({
   providedIn: 'root',
   })
 export class AuthService {
-  constructor(private _http: HttpClient) {}
+  constructor( public jwtHelper: JwtHelperService) {}
+  public isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 }
